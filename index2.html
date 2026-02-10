@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandrawati Hospital | Advanced Pediatric Care</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- MODERN 3D & VIBRANT THEME --- */
+        :root {
+            --pink: #FF6B6B;
+            --blue: #4ECDC4;
+            --deep-blue: #0056b3;
+            --yellow: #FFD93D;
+            --purple: #6C5CE7;
+            --white: #ffffff;
+            --dark: #2D3436;
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+            --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Nunito', sans-serif; 
+            margin: 0; 
+            background-color: #F7F9FC; 
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Particles */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        h1, h2, h3 { font-family: 'Fredoka', sans-serif; letter-spacing: 0.5px; }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* --- NAVIGATION --- */
+        nav { 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 12px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-bottom: 4px solid var(--blue);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 8px 5%;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-img { 
+            height: 75px; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
+            transition: all 0.4s var(--bounce);
+            animation: gentle-bounce 2s ease-in-out infinite;
+        }
+        .logo-img:hover { transform: scale(1.15) rotate(-5deg); }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .hospital-name { 
+            font-size: 2.2rem; 
+            color: var(--deep-blue); 
+            font-weight: 900; 
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            transition: all 0.3s;
+        }
+
+        .hospital-name:hover {
+            color: var(--pink);
+            transform: scale(1.05);
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--dark); 
+            margin-left: 25px; 
+            font-weight: 800; 
+            font-size: 1.05rem;
+            position: relative;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--pink);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover { color: var(--pink); transform: translateY(-2px); }
+
+        .btn-appoint { 
+            background: linear-gradient(135deg, var(--pink), #ff8787); 
+            color: white !important; 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            box-shadow: 0 5px 0 #D63031, 0 10px 20px rgba(255, 107, 107, 0.4); 
+            transition: all 0.2s; 
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-appoint::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-appoint:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-appoint:active { transform: translateY(5px); box-shadow: none; }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            text-align: center; 
+            padding: 100px 5%; 
+            background: linear-gradient(180deg, #E0F7FA 0%, rgba(224, 247, 250, 0.3) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        .hero h1 { 
+            font-size: 4rem; 
+            color: var(--purple); 
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0px var(--white);
+            animation: slide-in-top 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes slide-in-top {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero p { 
+            font-size: 1.5rem; 
+            color: #555; 
+            margin-bottom: 40px; 
+            font-weight: 600;
+            animation: slide-in-bottom 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes slide-in-bottom {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-main-img {
+            border-radius: 40px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15); 
+            width: 100%; 
+            max-width: 550px; 
+            border: 10px solid white;
+            transition: all 0.5s var(--bounce);
+            animation: fade-in 1s ease-out 0.4s both;
+            cursor: pointer;
+        }
+        
+        @keyframes fade-in {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .hero-main-img:hover { 
+            transform: scale(1.05) rotate(-2deg); 
+            box-shadow: 0 35px 70px rgba(0,0,0,0.25);
+        }
+        
+        .hero-decoration { 
+            font-size: 3.5rem; 
+            position: absolute; 
+            animation: float 3s ease-in-out infinite; 
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+        .d1 { top: 10%; left: 8%; animation-delay: 0s; }
+        .d2 { top: 15%; right: 8%; animation-delay: 1.5s; }
+        
+        @keyframes float { 
+            0%, 100% { transform: translateY(0) rotate(0deg); } 
+            50% { transform: translateY(-25px) rotate(10deg); } 
+        }
+
+        /* Stats Counter Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--purple), var(--deep-blue));
+            padding: 60px 5%;
+            color: white;
+            margin: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--yellow);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* --- GRID LAYOUTS --- */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; 
+            padding: 0 5%;
+        }
+        
+        /* --- 3D INTERACTIVE CARDS --- */
+        .card-3d { 
+            background: white; 
+            border-radius: 25px; 
+            text-align: center; 
+            box-shadow: 0 10px 0 #E0E0E0, 0 20px 40px rgba(0,0,0,0.1); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            overflow: hidden;
+            border: 4px solid white;
+            position: relative;
+            transform-style: preserve-3d;        }
+        
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .card-3d:hover::before {
+            left: 100%;
+        }
+        
+        .card-3d:hover { 
+            transform: translateY(-15px) rotateX(5deg); 
+            box-shadow: 0 25px 0 #E0E0E0, 0 35px 70px rgba(0,0,0,0.2);
+        }
+        
+        .card-3d:active {
+            transform: translateY(5px) rotateX(0deg);
+            box-shadow: 0 5px 0 #E0E0E0;
+        }
+        
+        /* Card Variants */
+        .card-blue { border-bottom: 8px solid var(--blue); }
+        .card-pink { border-bottom: 8px solid var(--pink); }
+        .card-yellow { border-bottom: 8px solid var(--yellow); }
+        .card-purple { border-bottom: 8px solid var(--purple); }
+
+        .card-img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-bottom: 2px solid #eee;
+            transition: all 0.5s;
+        }
+        
+        .card-3d:hover .card-img {
+            transform: scale(1.1);
+        }
+        
+        .card-content { padding: 20px; }
+        .card-title { 
+            font-weight: 800; 
+            font-size: 1.3rem; 
+            color: var(--dark); 
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .card-3d:hover .card-title {
+            color: var(--pink);
+            transform: scale(1.05);
+        }
+        
+        .read-more-btn { 
+            margin-top: 15px; 
+            background: linear-gradient(135deg, var(--deep-blue), var(--blue)); 
+            color: white; 
+            border: none; 
+            padding: 10px 30px; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .read-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .read-more-btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .read-more-btn:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* --- DOCTORS --- */
+        .doc-card { 
+            background: white; 
+            border-radius: 30px; 
+            box-shadow: var(--shadow); 
+            text-align: center; 
+            padding-bottom: 20px;
+            border: 5px solid white;
+            transition: all 0.4s;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .doc-card::after {
+            content: '⭐';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0;
+            transform: rotate(-45deg) scale(0);
+            transition: all 0.4s;
+        }
+        
+        .doc-card:hover::after {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        
+        .doc-card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .doc-photo { 
+            width: 100%; 
+            height: 320px; 
+            object-fit: cover; 
+            border-radius: 25px 25px 0 0; 
+            border-bottom: 6px solid var(--yellow);
+            transition: all 0.5s;
+            filter: grayscale(20%);
+        }
+        
+        .doc-card:hover .doc-photo {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        
+        .doc-name { 
+            color: var(--deep-blue); 
+            font-size: 1.6rem; 
+            margin: 15px 0 5px; 
+            font-weight: 900;
+            transition: all 0.3s;
+        }
+        
+        .doc-card:hover .doc-name {
+            color: var(--pink);
+            transform: scale(1.05);
+        }
+
+        /* --- VACCINE TABLE --- */
+        .vaccine-wrapper {
+            background: white; 
+            padding: 30px; 
+            border-radius: 30px; 
+            box-shadow: var(--shadow); 
+            margin-top: 30px; 
+            border: 5px solid var(--purple);
+            overflow-x: auto;
+            animation: slide-in-bottom 0.8s ease-out;
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 700px; 
+        }
+        
+        th { 
+            background: linear-gradient(135deg, var(--purple), var(--deep-blue)); 
+            color: white; 
+            padding: 20px; 
+            text-align: left; 
+            font-size: 1.1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td { 
+            padding: 18px; 
+            border-bottom: 2px solid #eee; 
+            color: #555; 
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        tr:nth-child(even) { background: #f8f9fa; }
+        
+        tr:hover { 
+            background: linear-gradient(90deg, #E0E7FF, #FFE5E5);
+            transform: scale(1.01);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        tr:hover td {
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        /* --- MODAL (POPUP) --- */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(45, 52, 54, 0.95); 
+            z-index: 2000; 
+            backdrop-filter: blur(15px);
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .modal-box { 
+            background: white; 
+            width: 90%; 
+            max-width: 700px; 
+            border-radius: 35px; 
+            padding: 45px; 
+            position: relative; 
+            animation: popIn 0.5s var(--bounce);
+            max-height: 85vh; 
+            overflow-y: auto; 
+            border: 10px solid var(--blue);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        }
+        
+        @keyframes popIn { 
+            0% { transform: scale(0.7) rotate(-5deg); opacity: 0; } 
+            100% { transform: scale(1) rotate(0); opacity: 1; } 
+        }
+        
+        .close-btn { 
+            position: absolute; 
+            top: 20px; 
+            right: 25px; 
+            font-size: 2.8rem; 
+            cursor: pointer; 
+            color: var(--pink); 
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 107, 107, 0.1);
+        }
+        
+        .close-btn:hover { 
+            transform: rotate(90deg) scale(1.2); 
+            background: var(--pink);
+            color: white;
+        }
+        
+        .modal-h2 { 
+            color: var(--deep-blue); 
+            margin-top: 0; 
+            font-size: 2.2rem; 
+            border-bottom: 4px solid var(--yellow); 
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .modal-ul { 
+            text-align: left; 
+            line-height: 2; 
+            font-size: 1.15rem; 
+            color: #444; 
+            margin-top: 25px; 
+        }
+        
+        .modal-ul li { 
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid var(--blue);
+            padding-top: 5px;
+            padding-bottom: 5px;
+            transition: all 0.3s;
+        }
+        
+        .modal-ul li:hover {
+            border-left-color: var(--pink);
+            transform: translateX(10px);
+            background: #f8f9fa;
+            padding-left: 20px;
+        }
+
+        /* --- BOOKING FORM --- */
+        .booking-section { 
+            background: linear-gradient(135deg, #fff 0%, #f0f9ff 100%); 
+            max-width: 800px; 
+            margin: 80px auto; 
+            padding: 60px; 
+            border-radius: 50px; 
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15); 
+            border: 8px solid var(--deep-blue); 
+            position: relative;
+            animation: slide-in-bottom 0.8s ease-out;
+        }
+        
+        .booking-section::before { 
+            content: '🧸'; 
+            font-size: 6rem; 
+            position: absolute; 
+            top: -60px; 
+            right: -30px; 
+            transform: rotate(15deg);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        input, select { 
+            width: 100%; 
+            padding: 18px; 
+            margin-bottom: 25px; 
+            border: 3px solid #e0e0e0; 
+            border-radius: 20px; 
+            font-size: 1.1rem; 
+            box-sizing: border-box; 
+            transition: all 0.3s;
+            background: #f9f9f9;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        input:focus, select:focus { 
+            border-color: var(--pink); 
+            outline: none; 
+            background: white; 
+            box-shadow: 0 0 0 5px rgba(255,107,107,0.15);
+            transform: scale(1.02);
+        }
+        
+        input:hover, select:hover {
+            border-color: var(--blue);
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background: linear-gradient(135deg, var(--dark), #1a1f20); 
+            color: white; 
+            padding: 80px 10%; 
+            text-align: center; 
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+        }
+        
+        footer h2 {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .hospital-name { font-size: 1.5rem; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .grid-container { grid-template-columns: 1fr; }
+            .stat-number { font-size: 2.5rem; }
+            .booking-section { padding: 30px; }
+            .modal-box { padding: 25px; }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+        
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid var(--pink);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div style="background: var(--pink); color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; animation: slide-in-top 0.5s ease-out;">
+        🚑 EMERGENCY 24/7 HELPLINE: <a href="tel:+917779970332" style="color:white; text-decoration: underline; font-size: 1.15rem;">+91 77799 70332</a>
+    </div>
+
+    <nav id="mainNav">
+        <div class="logo-container">
+            <img src="hospital-logo.jpg" alt="Logo" class="logo-img">
+            <div class="hospital-name">Chandrawati<br><span style="font-size: 1.2rem; color: var(--blue);">Hospital</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="#doctors">Doctors</a>
+            <a href="#info">Parents Guide</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#vaccine">Vaccine Chart</a>
+            <a href="#booking" class="btn-appoint">Book Appointment</a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <span class="hero-decoration d1">🎈</span>
+        <span class="hero-decoration d2">🍬</span>
+        <h1>Where Little Smiles<br>Grow Big! 🌟</h1>
+        <p>Expert Pediatric, Neonatal & Gynecological Care in a Loving Environment.</p>
+        <br>
+        <img src="image_1.jpg" class="hero-main-img" alt="Mother and Child Care">
+    </header>
+
+    <!-- Stats Counter Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" data-target="5000">0</span>
+                <span class="stat-label">Happy Families</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="15">0</span>
+                <span class="stat-label">Years of Excellence</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="24">0</span>
+                <span class="stat-label">Hours Emergency Care</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="100">0</span>
+                <span class="stat-label">% Dedication</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="info" style="padding: 100px 5%;">
+        <div style="text-align: center; margin-bottom: 70px;">
+            <h2 style="font-size: 3rem; color: var(--deep-blue);">Parenting Knowledge Hub 🧠</h2>
+            <p style="font-size: 1.3rem; color: #666;">Expert tips for your little one's journey. Click to read!</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card-3d card-blue" onclick="openModal('modal-growth')">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">📏 Growth & Milestones</div>
+                    <p>Is your child on track?</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+
+            <div class="card-3d card-pink" onclick="openModal('modal-vaccine')">
+                <img src="painless.jpg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">💉 Painless Vaccination</div>
+                    <p>Less tears, more protection.</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+
+            <div class="card-3d card-yellow" onclick="openModal('modal-nutrition')">
+                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">🥦 Super Nutrition</div>
+                    <p>Building brains & immunity.</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+
+            <div class="card-3d card-purple" onclick="openModal('modal-screen')">
+                <img src="https://images.unsplash.com/photo-1512413914633-b5043f4041ea?auto=format&fit=crop&w=600&q=80" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">📱 Screen Time Rules</div>
+                    <p>Protecting little eyes.</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+
+            <div class="card-3d card-pink" onclick="openModal('modal-breastfeeding')">
+                <img src="ebf.jpeg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">🤱 Exclusive Breastfeeding</div>
+                    <p>Nature's perfect food.</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+
+            <div class="card-3d card-yellow" onclick="openModal('modal-complementary')">
+                <img src="complementaryfeed.jpeg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">🥣 Starting Solids</div>
+                    <p>From milk to meals.</p>
+                    <button class="read-more-btn">Read Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="facilities" style="padding: 100px 5%; background: linear-gradient(180deg, #E0F7FA 0%, #F0F4FF 100%);">
+        <div style="text-align: center; margin-bottom: 70px;">
+            <h2 style="font-size: 3rem; color: var(--deep-blue);">Advanced Critical Care 🏥</h2>
+            <p style="font-size: 1.3rem;">State-of-the-art technology for your child's safety.</p>
+        </div>
+        <div class="grid-container">
+            
+            <div class="card-3d card-blue">
+                <img src="ventilator.jpg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">Neonatal Ventilator</div>
+                    <p>Advanced life support for critical breathing issues.</p>
+                </div>
+            </div>
+
+            <div class="card-3d card-blue">
+                <img src="cpap.jpg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">HFNC & Bubble CPAP</div>
+                    <p>Non-invasive respiratory support for preemies.</p>
+                </div>
+            </div>
+
+            <div class="card-3d card-blue">
+                <img src="photo.jpeg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">LED Phototherapy</div>
+                    <p>Double surface unit for treating jaundice safely.</p>
+                </div>
+            </div>
+
+            <div class="card-3d card-pink">
+                <img src="painless.jpg" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">Painless Vaccination</div>
+                    <p>Comfortable immunization center for kids.</p>
+                </div>
+            </div>
+
+            <div class="card-3d card-purple">
+                <img src="https://images.unsplash.com/photo-1516574187841-693083f65220?auto=format&fit=crop&w=600&q=80" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">Modular OT</div>
+                    <p>Sterile surgical environment.</p>
+                </div>
+            </div>
+            
+             <div class="card-3d card-blue">
+                <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=600&q=80" class="card-img">
+                <div class="card-content">
+                    <div class="card-title">Level 3 NICU</div>
+                    <p>Intensive care for newborns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="doctors" style="padding: 100px 5%; background: white;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 3rem; color: var(--pink);">Meet Our Heroes 🦸‍♂️</h2>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 50px;">
+            <div class="doc-card">
+                <img src="ritik.jpg" alt="Dr. Ritik" class="doc-photo">
+                <div class="card-content">
+                    <div class="doc-name">Dr. Ritik Chandra</div>
+                    <p style="color:#666; font-weight:600;">Consultant<br>Paediatrics & Neonatology</p>
+                </div>
+            </div>
+
+             <div class="doc-card">
+                <img src="subhash.jpg" alt="Dr. Subhash Chandra" class="doc-photo">
+                <div class="card-content">
+                    <div class="doc-name">Dr. Subhash Chandra</div>
+                    <p style="color:#666; font-weight:600;">Senior Consultant<br>Paediatrics</p>
+                </div>
+            </div>
+
+            <div class="doc-card">
+                <img src="anupama.jpg" alt="Dr. Anupama" class="doc-photo">
+                <div class="card-content">
+                    <div class="doc-name">Dr. Anupama Prasad</div>
+                    <p style="color:#666; font-weight:600;">Consultant<br>Obs & Gynaecology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vaccine" style="padding: 100px 5%; background: linear-gradient(135deg, #FFF9C4 0%, #FFE5B4 100%);">
+        <h2 style="text-align:center; color: var(--dark); font-size: 2.8rem; margin-bottom: 20px;">🗓️ Complete IAP Vaccination Schedule</h2>
+        <p style="text-align:center; font-size: 1.2rem; color: #666; margin-bottom: 40px;">Follow this comprehensive guide for your child's immunization</p>
+        <div class="vaccine-wrapper">
+            <table>
+                <tr>
+                    <th>Age</th>
+                    <th>Vaccines Due</th>
+                </tr>
+                <tr><td><strong>At Birth</strong></td><td>BCG, OPV-0, Hepatitis B-1</td></tr>
+                <tr><td><strong>6 Weeks</strong></td><td>DTwP/DTaP-1, IPV-1, Hep B-2, Hib-1, Rota-1, PCV-1</td></tr>
+                <tr><td><strong>10 Weeks</strong></td><td>DTwP/DTaP-2, IPV-2, Hib-2, Rota-2, PCV-2</td></tr>
+                <tr><td><strong>14 Weeks</strong></td><td>DTwP/DTaP-3, IPV-3, Hib-3, Rota-3, PCV-3</td></tr>
+                <tr><td><strong>6 Months</strong></td><td>Influenza-1, Typhoid Conjugate</td></tr>
+                <tr><td><strong>7 Months</strong></td><td>Influenza-2</td></tr>
+                <tr><td><strong>9 Months</strong></td><td>MMR-1 (Measles, Mumps, Rubella)</td></tr>
+                <tr><td><strong>12 Months</strong></td><td>Hepatitis A-1</td></tr>
+                <tr><td><strong>15 Months</strong></td><td>MMR-2, Varicella-1, PCV Booster</td></tr>
+                <tr><td><strong>16-24 Months</strong></td><td>DTwP/DTaP-B1, IPV-B1, Hib-B1</td></tr>
+                <tr><td><strong>18-19 Months</strong></td><td>Hepatitis A-2, Varicella-2</td></tr>
+                <tr><td><strong>4-6 Years</strong></td><td>DTwP/DTaP-B2, MMR-3</td></tr>
+                <tr><td><strong>10-12 Years</strong></td><td>Tdap, HPV (For Girls - Cervical Cancer)</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="booking-section">
+            <h2 style="text-align:center; color:var(--deep-blue); font-size: 2.8rem; margin-bottom: 10px;">Book Appointment 🍭</h2>
+            <p style="text-align:center; color:#666; font-size: 1.2rem; margin-bottom: 30px;">Fast Track OPD Booking | Instant Email Confirmation</p>
+            <form id="opdForm">
+                <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Patient Name</label>
+                <input type="text" id="pname" required placeholder="Full Name">
+                
+                <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Email (For Confirmation)</label>
+                <input type="email" id="p_email" required placeholder="you@email.com">
+                
+                <div style="display:flex; gap:25px;">
+                    <div style="flex:1">
+                        <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Phone</label>
+                        <input type="tel" id="phone" required placeholder="Your phone number">
+                    </div>
+                    <div style="flex:1">
+                        <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Age</label>
+                        <input type="number" id="age" required placeholder="Patient age">
+                    </div>
+                </div>
+
+                <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Department</label>
+                <select id="dept" required>
+                    <option value="">-- Select Department --</option>
+                    <option value="Paediatrics">Paediatrics (Child)</option>
+                    <option value="Gynecology">Gynaecology (Mom)</option>
+                    <option value="Vaccination">Vaccination</option>
+                </select>
+
+                <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 8px;">Preferred Date</label>
+                <input type="date" id="date" required>
+
+                <button type="submit" class="btn-appoint" style="width:100%; border:none; font-size:1.3rem; cursor:pointer; margin-top: 10px;">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <h2 style="color:var(--yellow); font-size: 2.8rem; margin-bottom: 20px;">Chandrawati Hospital</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 15px;">GT Road, Barwadda, Dhanbad, Pin - 826004</p>
+        <div style="font-size:3rem; margin:40px 0;">🧸 🍬 🎈</div>
+        <p style="font-size: 1.1rem; opacity: 0.8;">&copy; 2026 Chandrawati Hospital | Dedicated to Care</p>
+    </footer>
+
+    <!-- MODALS -->
+    <div id="modal-growth" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-growth').style.display='none'">&times;</span>
+            <h2 class="modal-h2">📏 Growth & Milestones</h2>
+            <ul class="modal-ul">
+                <li><strong>Weight Check:</strong> Newborns lose weight in the first week but regain it by day 10.</li>
+                <li><strong>Red Flags:</strong> No neck holding by 4 months, not sitting by 9 months, no words by 15 months.</li>
+                <li><strong>Height:</strong> Height usually doubles by 4 years of age.</li>
+                <li><strong>Teething:</strong> First tooth usually appears between 6-8 months.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-vaccine" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-vaccine').style.display='none'">&times;</span>
+            <h2 class="modal-h2">💉 Vaccination Guide</h2>
+            <ul class="modal-ul">
+                <li><strong>Painless vs Painful:</strong> Painless (Acellular) vaccines cause significantly less fever and swelling than whole-cell vaccines.</li>
+                <li><strong>Post-Vaccine Care:</strong> Do not massage the injection site. Use a cool cloth for swelling.</li>
+                <li><strong>Missed Dose?</strong> Don't panic. Consult us to reschedule. It is never too late to catch up.</li>
+                <li><strong>Flu Shot:</strong> Recommended annually for children under 5 years.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-nutrition" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-nutrition').style.display='none'">&times;</span>
+            <h2 class="modal-h2">🥦 Nutrition & Diet</h2>
+            <ul class="modal-ul">
+                <li><strong>Brain Foods:</strong> Eggs, Fish, Nuts (powdered for toddlers), and Yogurt.</li>
+                <li><strong>Iron:</strong> Essential for IQ. Found in Green Leafy Veggies, Jaggery, and Dates.</li>
+                <li><strong>The No-No List:</strong> No Salt, Sugar, or Honey/Cow Milk before 1 year of age.</li>
+                <li><strong>Picky Eaters:</strong> Don't force feed. Offer small, colorful portions frequently.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-screen" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-screen').style.display='none'">&times;</span>
+            <h2 class="modal-h2">📱 Screen Time & Eyes</h2>
+            <ul class="modal-ul">
+                <li><strong>0-2 Years:</strong> Zero screen time. Brain development relies on real-world interaction.</li>
+                <li><strong>2-5 Years:</strong> Max 1 hour/day of educational content.</li>
+                <li><strong>20-20-20 Rule:</strong> Every 20 mins, look 20 feet away for 20 seconds to reduce eye strain.</li>
+                <li><strong>Blue Light:</strong> Stops sleep hormone (Melatonin). No screens 1 hour before bed.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-breastfeeding" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-breastfeeding').style.display='none'">&times;</span>
+            <h2 class="modal-h2">🤱 Exclusive Breastfeeding</h2>
+            <ul class="modal-ul">
+                <li><strong>No Water Needed:</strong> Breast milk is 88% water. It hydrates the baby perfectly even in summer.</li>
+                <li><strong>On Demand:</strong> Feed whenever the baby shows hunger cues (licking lips, sucking fingers).</li>
+                <li><strong>Fore-milk vs Hind-milk:</strong> Fore-milk quenches thirst; Hind-milk (thicker) provides fat for weight gain. Empty one breast fully before switching.</li>
+                <li><strong>Mother's Diet:</strong> Eat healthy. No strict restrictions unless the baby shows specific allergies.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-complementary" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="document.getElementById('modal-complementary').style.display='none'">&times;</span>
+            <h2 class="modal-h2">🥣 Starting Solids (6+ Months)</h2>
+            <ul class="modal-ul">
+                <li><strong>Day 1-3:</strong> Start with single-grain cereal (Rice/Ragi) or mashed apple.</li>
+                <li><strong>Texture:</strong> Start with smooth puree, move to mashed/lumpy by 8 months.</li>
+                <li><strong>Food Groups:</strong> Introduce vegetables early so they don't develop a sweet tooth.</li>
+                <li><strong>Allergy Check:</strong> Introduce new foods one at a time and wait 3 days to check for rashes.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-box" style="text-align:center; border-color: var(--yellow);">
+            <div style="font-size:7rem; animation: bounce 1s ease-in-out infinite;">🎉</div>
+            <h2 style="color:var(--deep-blue); font-size: 2.5rem; margin: 20px 0;">Booking Confirmed!</h2>
+            <p style="font-size: 1.3rem;">We have sent a confirmation email to:<br><b id="confirm-email" style="color:var(--pink); font-size: 1.4rem;"></b></p>
+            <button class="btn-appoint" onclick="document.getElementById('bookingModal').style.display='none'" style="margin-top: 20px; padding: 15px 40px;">Awesome!</button>
+        </div>
+    </div>
+
+    <script>
+        // --- PARTICLES ANIMATION ---
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#6C5CE7'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // --- SCROLL PROGRESS BAR ---
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // --- NAVIGATION SCROLL EFFECT ---
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // --- ANIMATED COUNTER ---
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.textContent = Math.floor(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        updateCounter();
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) observer.observe(statsSection);
+
+        // --- EMAILJS KEYS ---
+        const EMAIL_PUBLIC_KEY = "Os_1cPv4tl4ROt2L3"; 
+        const EMAIL_SERVICE_ID = "Chandrawatihosptial"; 
+        const EMAIL_TEMPLATE_ID = "template_0zmj1zt"; 
+
+        (function() { emailjs.init(EMAIL_PUBLIC_KEY); })();
+
+        // --- MODAL LOGIC ---
+        function openModal(id) { 
+            document.getElementById(id).style.display = 'flex'; 
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(e) { 
+            if (e.target.classList.contains('modal-overlay')) { 
+                e.target.style.display = 'none'; 
+                document.body.style.overflow = 'auto';
+            } 
+        }
+
+        // --- BOOKING LOGIC ---
+        const form = document.getElementById('opdForm');
+        const submitBtn = document.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            submitBtn.innerHTML = "🎈 Booking...";
+            submitBtn.disabled = true;
+
+            const data = {
+                id: Date.now(),
+                name: document.getElementById('pname').value,
+                email: document.getElementById('p_email').value,
+                phone: document.getElementById('phone').value,
+                dept: document.getElementById('dept').value,
+                date: document.getElementById('date').value,
+                status: 'Pending'
+            };
+
+            // Save Locally
+            let bookings = JSON.parse(localStorage.getItem('hospital_appointments')) || [];
+            bookings.push(data);
+            localStorage.setItem('hospital_appointments', JSON.stringify(bookings));
+
+            // Send Email
+            emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, {
+                to_email: data.email, 
+                to_name: data.name, 
+                dept: data.dept, 
+                date: data.date, 
+                phone: data.phone
+            }).then(() => {
+                document.getElementById('confirm-email').innerText = data.email;
+                document.getElementById('bookingModal').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                submitBtn.innerHTML = "Confirm Booking";
+                submitBtn.disabled = false;
+                form.reset();
+            }, (err) => {
+                alert("Saved locally, but Email failed. Check internet.");
+                submitBtn.innerHTML = "Confirm Booking";
+                submitBtn.disabled = false;
+            });
+        });
+
+        // --- LOADING SCREEN ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.classList.add('hidden');
+            }, 800);
+        });
+
+        // --- MOBILE MENU ---
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Bounce animation for success modal
+        const bounceAnimation = `
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+        `;
+
+    </script>
+</body>
+</html>
