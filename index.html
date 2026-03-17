@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chandrawati Hospital | Paediatric, Maternity & Dermatology Care</title>
     
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Brevo transactional email (replaces EmailJS) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -1848,11 +1848,23 @@
 
     <!-- Booking Confirmation -->
     <div id="bookingModal" class="modal-overlay">
-        <div class="modal-box" style="text-align:center; max-width:440px; padding:40px 32px;">
+        <div class="modal-box" style="text-align:center; max-width:460px; padding:40px 32px;">
             <div class="confirm-icon"><i class="fas fa-check"></i></div>
             <h2 style="font-family:'Cormorant Garamond',serif; color:var(--navy); font-size:1.9rem; margin-bottom:10px;">Appointment Confirmed</h2>
-            <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.7; margin-bottom:24px;">A confirmation email has been sent to:<br><strong id="confirm-email" style="color:var(--teal);"></strong></p>
-            <button class="btn-primary" onclick="document.getElementById('bookingModal').style.display='none'" style="margin:0 auto; display:inline-flex;">Close</button>
+            <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.7; margin-bottom:8px;">A confirmation email has been sent to:<br><strong id="confirm-email" style="color:var(--teal);"></strong></p>
+
+            <!-- Booking summary for WhatsApp -->
+            <div id="booking-summary" style="background:var(--offwhite); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; margin:16px 0; text-align:left; font-size:0.85rem; color:var(--text-mid); line-height:1.8;"></div>
+
+            <!-- WhatsApp button -->
+            <a id="wa-link" href="#" target="_blank"
+               style="display:inline-flex; align-items:center; gap:10px; background:#25D366; color:white; padding:12px 24px; border-radius:8px; font-weight:600; font-size:0.92rem; text-decoration:none; margin-bottom:12px; width:100%; justify-content:center; box-sizing:border-box;">
+                <i class="fab fa-whatsapp" style="font-size:1.3rem;"></i> Send via WhatsApp
+            </a>
+
+            <button class="btn-primary" onclick="document.getElementById('bookingModal').style.display='none'" style="margin:0 auto; display:inline-flex; width:100%; justify-content:center; background:var(--offwhite); color:var(--navy); border:1px solid var(--border);">
+                Close
+            </button>
         </div>
     </div>
 
@@ -1968,10 +1980,50 @@
         }
 
         // --- EMAILJS ---
-        const EMAIL_PUBLIC_KEY = "Os_1cPv4tl4ROt2L3";
-        const EMAIL_SERVICE_ID = "Chandrawatihosptial";
-        const EMAIL_TEMPLATE_ID = "template_0zmj1zt";
-        (function() { emailjs.init(EMAIL_PUBLIC_KEY); })();
+        // --- EMAIL CONFIG ---
+        // API key is stored securely in a Cloudflare Worker (server-side proxy)
+        // See SETUP.md for deployment instructions
+        const EMAIL_PROXY_URL = 'https://chandrawati-email.drritikchandra.workers.dev';
+
+        function sendBrevoEmail(toEmail, toName, dept, date, phone, apptNum, slot) {
+            const htmlContent = `
+                <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;border:1px solid #e4e2dc;border-radius:10px;overflow:hidden;">
+                    <div style="background:#0f2549;padding:24px 28px;">
+                        <h2 style="color:#ffffff;margin:0;font-size:1.4rem;">Chandrawati Hospital</h2>
+                        <p style="color:rgba(255,255,255,0.6);margin:4px 0 0;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Appointment Confirmation</p>
+                    </div>
+                    <div style="padding:28px;">
+                        <p style="color:#4a4a52;font-size:0.95rem;">Dear <strong>${toName}</strong>,</p>
+                        <p style="color:#4a4a52;font-size:0.9rem;">Your OPD appointment has been confirmed. Details below:</p>
+                        <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:0.9rem;">
+                            <tr style="background:#f8f7f4;"><td style="padding:10px 14px;color:#8a8a95;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;">Department</td><td style="padding:10px 14px;color:#1c1c1e;font-weight:600;">${dept}</td></tr>
+                            <tr><td style="padding:10px 14px;color:#8a8a95;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;">Date</td><td style="padding:10px 14px;color:#1c1c1e;font-weight:600;">${date}</td></tr>
+                            <tr style="background:#f8f7f4;"><td style="padding:10px 14px;color:#8a8a95;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;">Time Slot</td><td style="padding:10px 14px;color:#1c1c1e;font-weight:600;">${slot}</td></tr>
+                            <tr><td style="padding:10px 14px;color:#8a8a95;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;">Token No.</td><td style="padding:10px 14px;color:#0e7490;font-weight:700;font-size:1.1rem;">#${apptNum}</td></tr>
+                            <tr style="background:#f8f7f4;"><td style="padding:10px 14px;color:#8a8a95;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.06em;">Contact</td><td style="padding:10px 14px;color:#1c1c1e;">${phone}</td></tr>
+                        </table>
+                        <p style="color:#4a4a52;font-size:0.85rem;margin-top:16px;">Please arrive 10 minutes before your scheduled time slot.</p>
+                        <div style="background:#f8f7f4;border-radius:8px;padding:14px 16px;margin-top:20px;font-size:0.82rem;color:#4a4a52;line-height:1.7;">
+                            📍 GT Road, Barwadda, Dhanbad — 826004<br>
+                            📞 +91 77799 70332 &nbsp;|&nbsp; 24/7 Emergency
+                        </div>
+                    </div>
+                    <div style="background:#0f2549;padding:14px 28px;text-align:center;">
+                        <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin:0;">© 2026 Chandrawati Hospital. All rights reserved.</p>
+                    </div>
+                </div>`;
+
+            // Call the secure proxy worker — API key never touches the browser
+            return fetch(EMAIL_PROXY_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    toEmail, toName, dept, date, phone,
+                    apptNum, slot, htmlContent,
+                    subject: `Appointment Confirmed — ${dept} on ${date} | Token #${apptNum}`
+                })
+            });
+        }
 
         // --- MODAL LOGIC ---
         function openModal(id) {
@@ -2049,6 +2101,9 @@
                 tbody.innerHTML += `<tr><td><strong>${v.date}</strong></td><td>${v.dept}</td><td><span class="token-badge">#${v.token}</span><br><small style="color:var(--text-light)">${v.time}</small></td><td><span class="status-badge">${v.status}</span></td></tr>`;
             });
         }
+        // Hospital WhatsApp number — change to your actual number
+        const HOSPITAL_WA_NUMBER = '917779970332'; // format: countrycode + number, no +
+
         function handleBookVisit() {
             const dept = document.getElementById('book-dept').value;
             const date = document.getElementById('book-date').value;
@@ -2066,12 +2121,33 @@
             db[currentUser.phone].visits.push({ date, dept, status: 'Confirmed', token: apptNum, time: slot });
             saveDB(db);
             currentUser = db[currentUser.phone];
-            emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, {
-                to_email: currentUser.email, to_name: currentUser.name,
-                dept, date, phone: currentUser.phone,
-                appointment_number: apptNum, appointment_time: slot
-            }).then(() => {}, () => {}).finally(() => {
+
+            sendBrevoEmail(currentUser.email, currentUser.name, dept, date, currentUser.phone, apptNum, slot)
+            .then(() => {}, () => {}).finally(() => {
+                // Email confirmation
                 document.getElementById('confirm-email').innerText = currentUser.email;
+
+                // Booking summary box
+                document.getElementById('booking-summary').innerHTML =
+                    `<strong>Patient:</strong> ${currentUser.name}<br>
+                     <strong>Department:</strong> ${dept}<br>
+                     <strong>Date:</strong> ${date}<br>
+                     <strong>Time Slot:</strong> ${slot}<br>
+                     <strong>Token No.:</strong> #${apptNum}`;
+
+                // Build WhatsApp message
+                const waMsg = encodeURIComponent(
+                    `*Chandrawati Hospital — Appointment Confirmed*\n\n` +
+                    `Patient: ${currentUser.name}\n` +
+                    `Department: ${dept}\n` +
+                    `Date: ${date}\n` +
+                    `Time Slot: ${slot}\n` +
+                    `Token No.: #${apptNum}\n\n` +
+                    `📍 GT Road, Barwadda, Dhanbad — 826004\n` +
+                    `📞 +91 77799 70332`
+                );
+                document.getElementById('wa-link').href = `https://wa.me/${HOSPITAL_WA_NUMBER}?text=${waMsg}`;
+
                 document.getElementById('bookingModal').style.display = 'flex';
                 btn.innerHTML = 'Confirm Booking';
                 btn.disabled = false;
